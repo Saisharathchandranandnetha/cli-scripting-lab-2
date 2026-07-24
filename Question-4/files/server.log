@@ -1,0 +1,7 @@
+INFO Server started
+INFO User logged in
+ERROR Database connection failed
+INFO Request processed
+WARNING High memory usage
+ERROR Authentication failed
+ERROR Live server failure detected

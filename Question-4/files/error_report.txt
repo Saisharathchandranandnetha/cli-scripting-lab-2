@@ -1,0 +1,2 @@
+ERROR Database connection failed
+ERROR Authentication failed
