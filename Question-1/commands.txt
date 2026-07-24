@@ -1,0 +1,53 @@
+# Question 1: File Management & Duplicate Detection - Commands
+
+# Step 1: Navigate to the question directory
+cd /workspaces/cli-scripting-lab-2/Question-1
+pwd
+ls -la
+
+# Step 2: Create student submission files
+echo "Student A Assignment" > files/student1.txt
+echo "Student B Assignment" > files/student2.txt
+echo "Student A Assignment" > files/student3.txt
+echo "Student C Assignment" > files/student4.txt
+echo "Student B Assignment" > files/student5.txt
+
+# Step 3: View file contents
+cat files/student1.txt
+cat files/student2.txt
+cat files/student3.txt
+cat files/student4.txt
+cat files/student5.txt
+ls -l files/
+
+# Step 4: Detect duplicates using SHA-256 checksums
+sha256sum files/*.txt | sort
+
+# Step 5: Create backup directory and copy unique files
+mkdir -p backup
+cp files/student1.txt backup/
+cp files/student2.txt backup/
+cp files/student4.txt backup/
+
+# Step 6: Verify backup contents
+ls -l backup/
+cat backup/student1.txt
+cat backup/student2.txt
+cat backup/student4.txt
+
+# Step 7: Generate file count summary
+echo "Total files processed:"
+find files -type f | wc -l
+echo "Unique files backed up:"
+find backup -type f | wc -l
+echo "Duplicate files:"
+echo 2
+
+# Step 8: View processing report
+cat report.txt
+ls -l report.txt
+
+# Step 9: Error redirection
+ls files/nonexistent.txt 2> errors.log
+cat errors.log
+ls -l errors.log

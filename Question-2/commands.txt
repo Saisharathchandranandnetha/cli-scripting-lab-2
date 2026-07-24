@@ -1,0 +1,22 @@
+# Question 2: Process Management - Web Server Monitor - Commands
+
+# Step 1: Navigate and verify environment
+cd /workspaces/cli-scripting-lab-2/Question-2
+pwd
+ls -la
+gcc --version
+
+# Step 2: Write/edit the source code
+nano src/process_monitor.c
+
+# Step 3: View source code
+cat src/process_monitor.c
+
+# Step 4: Compile with warnings enabled
+gcc -Wall -Wextra src/process_monitor.c -o process_monitor
+
+# Step 5: Verify compiled binary
+ls -l process_monitor
+
+# Step 6: Run the program
+./process_monitor

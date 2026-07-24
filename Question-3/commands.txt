@@ -1,0 +1,20 @@
+# Question 3: Low-Level File I/O - Employee Records - Commands
+
+# Step 1: Navigate and verify environment
+cd /workspaces/cli-scripting-lab-2/Question-3
+pwd
+ls -la
+gcc --version
+
+# Step 2: Write/edit the source code
+nano src/employee_records.c
+
+# Step 3: Compile with warnings enabled
+gcc -Wall -Wextra src/employee_records.c -o employee_records
+
+# Step 4: Run the program
+./employee_records
+
+# Step 5: Verify the binary data file
+ls -l files/
+ls -lh files/employees.dat

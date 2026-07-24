@@ -1,0 +1,96 @@
+============================================================
+Question 1: File Management & Duplicate Detection - Output
+============================================================
+
+--- Step 1: Navigate and list directory (Screenshot: Q1_1) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-1
+pwd
+ls -la
+/workspaces/cli-scripting-lab-2/Question-1
+total 32
+drwxrwxrwx+ 6 codespace codespace 4096 Jul 24 13:54 .
+drwxrwxrwx+ 8 codespace root      4096 Jul 24 13:50 ..
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 README.md
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:52 backup
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 commands.txt
+-rw-rw-rw-  1 codespace codespace   69 Jul 24 13:54 errors.log
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:52 files
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 output.txt
+-rw-rw-rw-  1 codespace codespace   86 Jul 24 13:53 report.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:50 screenshots
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:51 src
+
+--- Step 2: List and view file contents (Screenshot: Q1_2) ---
+$ ls -l files/
+total 20
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student1.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student2.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student3.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student4.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student5.txt
+
+$ cat files/student1.txt
+cat files/student2.txt
+cat files/student3.txt
+cat files/student4.txt
+cat files/student5.txt
+Student A Assignment
+Student B Assignment
+Student A Assignment
+Student C Assignment
+Student B Assignment
+
+--- Step 3: Detect duplicates with SHA-256 checksums (Screenshot: Q1_3) ---
+$ sha256sum files/*.txt | sort
+194efa60bdb089996c62b7957e2f833b69852c5a9d5a22bdc937cf9d0119b0b8  files/student1.txt
+194efa60bdb089996c62b7957e2f833b69852c5a9d5a22bdc937cf9d0119b0b8  files/student3.txt
+59073f202ea676fa373f7815dc7ab861f649e4cd77ae99757c9f20f2485b6dfb  files/student2.txt
+59073f202ea676fa373f7815dc7ab861f649e4cd77ae99757c9f20f2485b6dfb  files/student5.txt
+a7f90f73af9a13fbe3ea03dd48b4f47bce96eb5d5fc1420d465edba2932902bf  files/student4.txt
+
+--- Step 4: Verify backup contents (Screenshot: Q1_4) ---
+$ ls -l backup/
+total 12
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student1.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student2.txt
+-rw-rw-rw- 1 codespace codespace 21 Jul 24 13:52 student4.txt
+
+$ cat backup/student1.txt
+cat backup/student2.txt
+cat backup/student4.txt
+Student A Assignment
+Student B Assignment
+Student C Assignment
+
+--- Step 5: Generate file count summary (Screenshot: Q1_5) ---
+$ echo "Total files processed:"
+find files -type f | wc -l
+
+echo "Unique files backed up:"
+find backup -type f | wc -l
+
+echo "Duplicate files:"
+echo 2
+Total files processed:
+5
+Unique files backed up:
+3
+Duplicate files:
+2
+
+--- Step 6: View processing report (Screenshot: Q1_6) ---
+$ cat report.txt
+Submission Processing Report
+Files processed: 5
+Duplicate files: 2
+Files backed up: 3
+
+$ ls -l report.txt
+-rw-rw-rw- 1 codespace codespace 86 Jul 24 13:53 report.txt
+
+--- Step 7: Error log (Screenshot: Q1_7) ---
+$ cat errors.log
+ls: cannot access 'files/nonexistent.txt': No such file or directory
+
+$ ls -l errors.log
+-rw-rw-rw- 1 codespace codespace 69 Jul 24 13:54 errors.log

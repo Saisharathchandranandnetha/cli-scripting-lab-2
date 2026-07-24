@@ -1,0 +1,69 @@
+============================================================
+Question 5: VIM Editor & Swap Files - Output
+============================================================
+
+--- Step 1: Environment and Vim Setup (Screenshot: Q5_1) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-5
+pwd
+ls -la
+vim --version | head
+/workspaces/cli-scripting-lab-2/Question-5
+total 16
+drwxrwxrwx+ 4 codespace codespace 4096 Jul 24 13:51 .
+drwxrwxrwx+ 8 codespace root      4096 Jul 24 13:50 ..
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 README.md
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 commands.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:51 files
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 output.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:50 screenshots
+VIM - Vi IMproved 9.1 (2024 Jan 02, compiled Sep 05 2025 19:44:46)
+Included patches: 1-16, 647, 678, 697
+Modified by team+vim@tracker.debian.org
+Compiled by team+vim@tracker.debian.org
+Huge version without GUI.  Features included (+) or not (-):
++acl               +file_in_path      +mouse_urxvt       -tag_any_white
++arabic            +find_in_path      +mouse_xterm       -tcl
++autocmd           +float             +multi_byte        +termguicolors
++autochdir         +folding           +multi_lang        +terminal
+-autoservername    -footer            -mzscheme          +terminfo
+
+--- Step 2: Create Server Configuration (Screenshot: Q5_2) ---
+$ echo "server_port=8080" > files/server.conf
+echo "database=production" >> files/server.conf
+cat files/server.conf
+server_port=8080
+database=production
+
+--- Step 3: Discover Swap Files (Screenshot: Q5_3) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-5
+ls -la files/
+total 36
+drwxrwxrwx+ 2 codespace codespace  4096 Jul 24 14:46 .
+drwxrwxrwx+ 4 codespace codespace  4096 Jul 24 13:51 ..
+-rw-r--r--  1 codespace codespace 12288 Jul 24 14:48 .server.conf.swo
+-rw-r--r--  1 codespace codespace 12288 Jul 24 14:41 .server.conf.swp
+-rw-rw-rw-  1 codespace codespace    37 Jul 24 14:39 server.conf
+
+--- Step 4: Resolve Swap Conflict in Vim (Screenshot: Q5_4) ---
+Swap files found:
+   Using specified name:
+1.    .server.conf.swo
+            owned by: codespace   dated: Fri Jul 24 14:48:57 2026
+           file name: /workspaces/cli-scripting-lab-2/Question-5/files/server.conf
+            modified: YES
+           user name: codespace   host name: codespaces-0488d5
+          process ID: 41376
+2.    .server.conf.swp
+            owned by: codespace   dated: Fri Jul 24 14:41:11 2026
+           file name: /workspaces/cli-scripting-lab-2/Question-5/files/server.conf
+            modified: YES
+           user name: codespace   host name: codespaces-0488d5
+          process ID: 37656
+      In directory ~/tmp:
+         -- none --
+      In directory /var/tmp:
+         -- none --
+      In directory /tmp:
+         -- none --
+
+Enter number of swap file to use (0 to quit):

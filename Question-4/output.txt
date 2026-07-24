@@ -1,0 +1,74 @@
+============================================================
+Question 4: Log Analysis & I/O Redirection - Output
+============================================================
+
+--- Step 1: Navigate and set up (Screenshot: Q4_1) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-4
+$ pwd
+/workspaces/cli-scripting-lab-2/Question-4
+
+$ ls -la
+total 16
+drwxrwxrwx+ 4 codespace codespace 4096 Jul 24 13:51 .
+drwxrwxrwx+ 8 codespace root      4096 Jul 24 13:50 ..
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 README.md
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 commands.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:51 files
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 output.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:50 screenshots
+
+$ cat > files/server.log << 'EOF'
+INFO Server started
+INFO User logged in
+ERROR Database connection failed
+INFO Request processed
+WARNING High memory usage
+ERROR Authentication failed
+EOF
+
+$ cat files/server.log
+INFO Server started
+INFO User logged in
+ERROR Database connection failed
+INFO Request processed
+WARNING High memory usage
+ERROR Authentication failed
+
+--- Step 2: Filter and redirect (Screenshot: Q4_2) ---
+$ grep "ERROR" files/server.log
+ERROR Database connection failed
+ERROR Authentication failed
+
+$ grep "ERROR" files/server.log > files/error_report.txt
+
+$ cat files/error_report.txt
+ERROR Database connection failed
+ERROR Authentication failed
+
+$ ls -l files/error_report.txt
+-rw-rw-rw- 1 codespace codespace 61 Jul 24 14:30 files/error_report.txt
+
+--- Step 3: Pipe and exit code (Screenshot: Q4_3) ---
+$ cat files/server.log | grep "ERROR"
+
+grep "ERROR" files/server.log > /dev/null
+
+echo $?
+ERROR Database connection failed
+ERROR Authentication failed
+0
+
+--- Step 4A: Real-time monitoring (Screenshot: Q4_4A) ---
+$ tail -f files/server.log
+INFO Server started
+INFO User logged in
+ERROR Database connection failed
+INFO Request processed
+WARNING High memory usage
+ERROR Authentication failed
+ERROR Live server failure detected
+
+--- Step 4B: Append new entry (Screenshot: Q4_4B) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-4
+
+echo "ERROR Live server failure detected" >> files/server.log

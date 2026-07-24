@@ -1,0 +1,74 @@
+============================================================
+Question 3: System Calls for File I/O - Output
+============================================================
+
+--- Step 1: Navigate and Environment Setup (Screenshot: Q3_1) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-3
+pwd
+ls -la
+gcc --version
+/workspaces/cli-scripting-lab-2/Question-3
+total 20
+drwxrwxrwx+ 5 codespace codespace 4096 Jul 24 13:51 .
+drwxrwxrwx+ 8 codespace root      4096 Jul 24 13:50 ..
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 README.md
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 commands.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:51 files
+-rw-rw-rw-  1 codespace codespace    0 Jul 24 13:51 output.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:50 screenshots
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 24 13:51 src
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+--- Step 2: Initial Implementation - Create File (Screenshot: Q3_2) ---
+$ nano src/employee_records.c
+$ gcc -Wall -Wextra src/employee_records.c -o employee_records
+$ ./employee_records
+File created successfully.
+File closed successfully.
+$ ls -l files/
+total 0
+-rw-r--r-- 1 codespace codespace 0 Jul 24 14:21 employees.dat
+
+--- Step 3: Write Records (Screenshot: Q3_3) ---
+$ nano src/employee_records.c
+$ gcc -Wall -Wextra src/employee_records.c -o employee_records
+$ ./employee_records
+File created successfully.
+Employee records written successfully.
+Bytes written: 120
+File closed successfully.
+$ ls -lh files/employees.dat
+-rw-r--r-- 1 codespace codespace 120 Jul 24 14:24 files/employees.dat
+
+--- Step 4: Seek and Update Record (Screenshot: Q3_4) ---
+$ nano src/employee_records.c
+$ gcc -Wall -Wextra src/employee_records.c -o employee_records
+$ ./employee_records
+File created successfully.
+Employee records written successfully.
+Bytes written: 120
+Employee 102 updated using lseek().
+File closed successfully.
+$ ls -lh files/employees.dat
+-rw-r--r-- 1 codespace codespace 120 Jul 24 14:26 files/employees.dat
+
+--- Step 5: Final Version - Read Record (Screenshot: Q3_5) ---
+$ nano src/employee_records.c
+$ gcc -Wall -Wextra src/employee_records.c -o employee_records
+$ ./employee_records
+File created successfully.
+Employee records written successfully.
+Bytes written: 120
+Employee 102 updated using lseek().
+
+Retrieved employee record:
+ID: 102
+Name: Priya
+Salary: 50000.00
+
+File closed successfully.
+$ ls -lh files/employees.dat
+-rw-r--r-- 1 codespace codespace 120 Jul 24 14:28 files/employees.dat

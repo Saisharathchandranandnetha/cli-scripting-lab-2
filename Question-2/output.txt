@@ -1,0 +1,90 @@
+============================================================
+Question 2: Process Management & Permissions - Output
+============================================================
+
+--- Step 1: Navigate and Environment Setup (Screenshot: Q2_1) ---
+$ cd /workspaces/cli-scripting-lab-2/Question-2
+pwd
+gcc --version
+ls -la
+/workspaces/cli-scripting-lab-2/Question-2
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+total 32
+drwxrwxrwx+ 4 codespace codespace  4096 Jul 24 14:00 .
+drwxrwxrwx+ 8 codespace root       4096 Jul 24 13:50 ..
+-rw-rw-rw-  1 codespace codespace     0 Jul 24 13:51 README.md
+-rw-rw-rw-  1 codespace codespace     0 Jul 24 13:51 commands.txt
+-rw-rw-rw-  1 codespace codespace     0 Jul 24 13:51 output.txt
+-rwxrwxrwx  1 codespace codespace 16280 Jul 24 14:00 process_monitor
+drwxrwxrwx+ 2 codespace codespace  4096 Jul 24 13:50 screenshots
+drwxrwxrwx+ 2 codespace codespace  4096 Jul 24 13:57 src
+
+--- Step 2: Display Initial Source Code (Screenshot: Q2_2) ---
+$ nano src/process_monitor.c
+$ cat src/process_monitor.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
+
+int main(void)
+{
+    printf("Web server process monitor started.\n");
+
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+        return 1;
+    }
+
+    if (pid == 0) {
+        printf("Child process started: PID=%d\n", getpid());
+        
+        /* Simulate work here */
+        
+        printf("Child process completed: PID=%d\n", getpid());
+        return 0;
+    }
+
+    printf("Parent created child: PID=%d\n", pid);
+
+    /* Add monitoring / timeout / cleanup here */
+
+    return 0;
+}
+
+--- Step 3: Compile and Run Initial Version (Screenshot: Q2_3) ---
+$ gcc -Wall -Wextra src/process_monitor.c -o process_monitor
+$ ls -l process_monitor
+-rwxrwxrwx 1 codespace codespace 16144 Jul 24 14:08 process_monitor
+$ ./process_monitor
+Web server process monitor started.
+Parent created child: PID=16672
+Child process started: PID=16672
+Child process completed: PID=16672
+
+--- Step 4: Run with Typo (Screenshot: Q2_4) ---
+$ ./process_monitor~gcc -Wall -Wextra src/process_monitor.c -o process_monitor
+./process_monitor
+bash: ./process_monitor~gcc: No such file or directory
+Web server process monitor started.
+Parent created child: PID=19872
+Child process started: PID=19872
+Child process completed: PID=19872
+
+--- Step 5: Final Version with Timeout and Signal (Screenshot: Q2_5) ---
+$ gcc -Wall -Wextra src/process_monitor.c -o process_monitor
+$ ./process_monitor
+Web server process monitor started.
+Parent created child: PID=22216
+Child process started: PID=22216
+Child process is still running.
+Waiting before terminating unresponsive child...
+Sending SIGTERM to child PID=22216
+Child process terminated and collected successfully.

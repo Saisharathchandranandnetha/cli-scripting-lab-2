@@ -1,0 +1,20 @@
+# Question 5: Vim Editor & Configuration Files - Commands
+
+# Step 1: Navigate and verify Vim installation
+cd /workspaces/cli-scripting-lab-2/Question-5
+pwd
+ls -la
+vim --version | head
+
+# Step 2: Create configuration file
+echo "server_port=8080" > files/server.conf
+echo "database=production" >> files/server.conf
+
+# Step 3: View the configuration file
+cat files/server.conf
+
+# Step 4: Edit with Vim
+vim files/server.conf
+
+# Step 5: List files including hidden swap files
+ls -la files/

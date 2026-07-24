@@ -1,0 +1,40 @@
+# Question 4: Log Analysis & I/O Redirection - Commands
+
+# Step 1: Navigate to the question directory
+cd /workspaces/cli-scripting-lab-2/Question-4
+pwd
+ls -la
+
+# Step 2: Create log file using here-document
+cat > files/server.log << 'EOF'
+INFO Server started
+INFO User logged in
+ERROR Database connection failed
+INFO Request processed
+WARNING High memory usage
+ERROR Authentication failed
+EOF
+
+# Step 3: View the log file
+cat files/server.log
+
+# Step 4: Filter ERROR entries with grep
+grep "ERROR" files/server.log
+
+# Step 5: Redirect filtered output to error report file
+grep "ERROR" files/server.log > files/error_report.txt
+cat files/error_report.txt
+ls -l files/error_report.txt
+
+# Step 6: Pipe - combine cat with grep
+cat files/server.log | grep "ERROR"
+
+# Step 7: Redirect to /dev/null and check exit code
+grep "ERROR" files/server.log > /dev/null
+echo $?
+
+# Step 8: Append new error entry to the log
+echo "ERROR Live server failure detected" >> files/server.log
+
+# Step 9: Monitor log file in real-time
+tail -f files/server.log
